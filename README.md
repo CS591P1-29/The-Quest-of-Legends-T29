@@ -17,7 +17,7 @@ Interface:
 Cells
    - PlainCells (CommonCells)
    - InAccessibleCells (NonAccessibleCells)
-   - NexusCellss/Markets
+   - NexusCells/Markets
    - BushCells
    - KoulouCells
    - CaveCells
@@ -41,8 +41,12 @@ Items
      - LigntningSpells
    - Potions
 
+
+Map
+   - TheQuestMap
+   - TheQuestOfLegendsMap
+
 Backpack  
-Map ()  
 Probability  
 Rounds ()  
 Teams (should be deleted bc each hero moves seperately)  
