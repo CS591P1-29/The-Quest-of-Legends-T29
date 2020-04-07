@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
-public class Markets extends Cells {
+public class Markets extends Cells implements BuyOrSell {
 
 	private static final double sellParam = 0.5;
 	public static ArrayList<Items> weapons = new ArrayList<Items> ();
