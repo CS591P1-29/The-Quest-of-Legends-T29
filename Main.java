@@ -10,10 +10,12 @@ public class Main {
 		
 		
 		
-		Simulation theQuest = new Simulation(scan);
+		TheQuestSimulation theQuest = new TheQuestSimulation(scan);
 		theQuest.initialize(); // Pre-process all data
-		
 		theQuest.simulate();
+		
+		
+		
 		
 		
 		scan.close();
