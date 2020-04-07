@@ -1,11 +1,11 @@
 # The-Quest-of-Legends
 
 
-"javac Main.java"
-"java Main"
+"javac Main.java"  
+"java Main"  
 
 
-Class Design
+Class Design:  
 
 Interface:
  - DataInitialize
@@ -41,9 +41,9 @@ Items
      - LigntningSpells
    - Potions
 
-Backpack
-Map ()
-Probability
-Rounds ()
-Teams (should be deleted bc each hero moves seperately)
-ZshColors (Works well but don't get any bonus points)
+Backpack  
+Map ()  
+Probability  
+Rounds ()  
+Teams (should be deleted bc each hero moves seperately)  
+ZshColors (Works well but don't get any bonus points)  
