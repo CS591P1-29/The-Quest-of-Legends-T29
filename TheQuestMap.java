@@ -3,17 +3,13 @@ import java.util.Random;
 
 public class TheQuestMap extends Map {
 
-	private ArrayList<ArrayList<Cells>> grid;
-	// size of map
-	private int N;
-	private int M;
 	// the location of heroes
 	private int coorX = 0;
 	private int coorY = 0;
 	
 	public TheQuestMap(int N, int M) {
-		this.N = N;
-		this.M = M;
+		super(N, M);
+
 		// Assume the heros stands on (0, 0) at the very beginning
 		
 		grid = new ArrayList<ArrayList<Cells>> ();
@@ -45,10 +41,6 @@ public class TheQuestMap extends Map {
 			}
 			grid.add(alCell);
 		}
-	}
-	
-	public Cells getGridAt(int x, int y) {
-		return grid.get(x).get(y);
 	}
 	
 	public Cells whereIsHeroes() {
