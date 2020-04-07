@@ -10,13 +10,16 @@ public class Main {
 		
 		
 		
+		/*
 		TheQuestSimulation theQuest = new TheQuestSimulation(scan);
 		theQuest.initialize(); // Pre-process all data
 		theQuest.simulate();
+		*/
 		
 		
-		
-		
+		TheQuestOfLegendsSimulation theQuestOfLegends = new TheQuestOfLegendsSimulation(scan);
+		theQuestOfLegends.initialize(); // Pre-process all data
+		theQuestOfLegends.simulate();
 		
 		scan.close();
 	}
