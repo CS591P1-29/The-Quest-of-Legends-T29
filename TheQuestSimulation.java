@@ -41,13 +41,13 @@ public class TheQuestSimulation extends Simulation {
 		
 		// simulation
 		boolean quitTheGame = false;
-		Team team = new Team();
+		TeamTheQuest team = new TeamTheQuest();
 		while (!quitTheGame) {
 			// Bulid/Rebuild your team
 			if (team.getMembers().size() == 0) {
 				System.out.println(ZshColor.ANSI_RED + " - Please build your team first.");
 				// Create a team
-				team = new Team();
+				team = new TeamTheQuest();
 				team.getSize(scan);
 				team.buildTeam(scan);
 			}
@@ -102,7 +102,7 @@ public class TheQuestSimulation extends Simulation {
 				}
 				else if (c == 'E') {
 					System.out.println(ZshColor.ANSI_RED + " - Let's rebuild your lineup.");
-					team = new Team();
+					team = new TeamTheQuest();
 					team.getSize(scan);
 					team.buildTeam(scan);
 				}

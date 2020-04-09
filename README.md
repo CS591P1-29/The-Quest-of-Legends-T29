@@ -46,8 +46,12 @@ Map
    - TheQuestMap
    - TheQuestOfLegendsMap
 
+Teams
+   - TeamTheQuest
+   - TeamTheQuestOfLegends
+
 Backpack  
 Probability  
 Rounds ()  
-Teams (should be deleted bc each hero moves seperately)  
+
 ZshColors (Works well but don't get any bonus points)  

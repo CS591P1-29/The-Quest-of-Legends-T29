@@ -2,12 +2,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Rounds implements Fight {
-	private Team team = null;
+	private TeamTheQuest team = null;
 	private Scanner scan;
 	private ArrayList<Roles> members = null;
 	private ArrayList<Roles> rivals = null;
 	
-	public Rounds(Scanner scan, Team team) {
+	public Rounds(Scanner scan, TeamTheQuest team) {
 		this.scan = scan;
 		this.team = team;
 		this.members = team.getMembers();

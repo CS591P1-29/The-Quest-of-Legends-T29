@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.Scanner;
 
 public class TheQuestOfLegendsSimulation extends Simulation {
@@ -19,7 +20,103 @@ public class TheQuestOfLegendsSimulation extends Simulation {
 	
 	@Override
 	public void initialize() {
-		// TODO Auto-generated method stub
+		// heroes
+		Heroes.heroes.add(new Warriors("Gaerdal_Ironhand", 100, 700, 500, 600, 1354, 7));
+		Heroes.heroes.add(new Warriors("Sehanine_Monnbow", 600, 700, 800, 500, 2500, 8));
+		Heroes.heroes.add(new Warriors("Muamman_Duathall", 300, 900, 500, 750, 2546, 6));
+		Heroes.heroes.add(new Warriors("Flandal_Steelskin", 200, 750, 650, 700, 2500, 7));
+		
+		
+		Heroes.heroes.add(new Sorcerers("Garl_Glittergold", 700, 550, 600, 500, 2500, 7));
+		Heroes.heroes.add(new Sorcerers("Rillifane_Rallathil", 1300, 750, 450, 500, 2500, 9));
+		Heroes.heroes.add(new Sorcerers("Segojan_Earthcaller", 900, 800, 500, 650, 2500, 5));
+		Heroes.heroes.add(new Sorcerers("Skoraeus_Stonebones", 800, 850, 600, 450, 2500, 6));
+		
+		Heroes.heroes.add(new Paladins("Solonor_Thelandira", 300, 750, 650, 700, 2500, 7));
+		Heroes.heroes.add(new Paladins("Everyone_Safe", 300, 750, 700, 700, 2500, 7));
+		Heroes.heroes.add(new Paladins("Wear_Masks", 250, 650, 600, 350, 2500, 4));
+		Heroes.heroes.add(new Paladins("Stop_Coronavirus", 100, 600, 500, 400, 2500, 5));
+		
+		// monsters
+		Monsters.monsters.add(new Dragons("Desghidorrah", 3, 300, 400, 35));
+		Monsters.monsters.add(new Dragons("Chrysophylax", 2, 200, 500, 20));
+		Monsters.monsters.add(new Dragons("BunsenBurner", 4, 400, 500, 45));
+		Monsters.monsters.add(new Dragons("Natsunomeryu", 1, 100, 200, 10));
+		Monsters.monsters.add(new Dragons("TheScaleless", 7, 700, 600, 75));
+		Monsters.monsters.add(new Dragons("Kas-Ethelinh", 5, 600, 500, 60));
+		Monsters.monsters.add(new Dragons("Alexstraszan", 10, 1000, 9000, 55));
+		Monsters.monsters.add(new Dragons("Phaarthurnax", 6, 600, 700, 60));
+		Monsters.monsters.add(new Dragons("D-Maleficent", 9, 900, 950, 85));
+		Monsters.monsters.add(new Dragons("TheWeatherbe", 8, 800, 900, 80));
+		
+		Monsters.monsters.add(new Exoskeletons("Cyrrollalee", 7, 700, 800, 75));
+		Monsters.monsters.add(new Exoskeletons("Brandobaris", 3, 350, 450, 30));
+		Monsters.monsters.add(new Exoskeletons("BigBad-Wolf", 1, 150, 250, 15));
+		Monsters.monsters.add(new Exoskeletons("WickedWitch", 2, 250, 350, 25));
+		Monsters.monsters.add(new Exoskeletons("Aasterinian", 4, 400, 500, 45));
+		Monsters.monsters.add(new Exoskeletons("Chronepsish", 6, 650, 750, 60));
+		Monsters.monsters.add(new Exoskeletons("Kiaransalee", 8, 850, 950, 85));
+		Monsters.monsters.add(new Exoskeletons("St-Shargaas", 5, 550, 650, 55));
+		Monsters.monsters.add(new Exoskeletons("Merrshaullk", 10, 1000, 900, 55));
+		Monsters.monsters.add(new Exoskeletons("St-Yeenoghu", 9, 950, 850, 90));
+				
+		Monsters.monsters.add(new Spirits("Andrealphus", 2, 600, 500, 40));
+		Monsters.monsters.add(new Spirits("Aim-Haborym", 1, 450, 350, 35));
+		Monsters.monsters.add(new Spirits("Andromalius", 3, 550, 450, 25));
+		Monsters.monsters.add(new Spirits("Chiang-shih", 4, 700, 600, 40));
+		Monsters.monsters.add(new Spirits("FallenAngel", 5, 800, 700, 50));
+		Monsters.monsters.add(new Spirits("Ereshkigall", 6, 950, 450, 35));
+		Monsters.monsters.add(new Spirits("Melchiresas", 7, 350, 150, 75));
+		Monsters.monsters.add(new Spirits("Jormunngand", 8, 600, 900, 20));
+		Monsters.monsters.add(new Spirits("Rakkshasass", 9, 550, 600, 35));
+		Monsters.monsters.add(new Spirits("Taltecuhtli", 10, 300, 200, 50));
+		
+		// sort all these monsters with respect to their level
+		Collections.sort(Monsters.monsters);
+		
+		// weapons
+		
+		Markets.weapons.add(new Weapons("Sword", 500, 1, 800 * 5, 1));
+		Markets.weapons.add(new Weapons("Bow", 300, 2, 500 * 5, 2));
+		Markets.weapons.add(new Weapons("Scythe", 1000, 6, 1100 * 5, 2));
+		Markets.weapons.add(new Weapons("Axe", 550, 5, 850 * 5, 1));
+		Markets.weapons.add(new Weapons("Shield", 400, 1, 300 * 5, 1));
+		Markets.weapons.add(new Weapons("TSwords", 1400, 8, 1600 * 5, 2));
+		Markets.weapons.add(new Weapons("Dagger", 200, 1, 400 * 5, 1));
+		
+		// armors
+		
+		Markets.armors.add(new Armors("Platinum_Shield", 150, 1, 200));
+		Markets.armors.add(new Armors("Breastplate", 350, 3, 600));
+		Markets.armors.add(new Armors("Full_Body_Armor", 1000, 8, 1100));
+		Markets.armors.add(new Armors("Wizard_Shield", 1200, 10, 1500));
+		Markets.armors.add(new Armors("Speed_Boots", 550, 4, 600));
+		
+		// potions
+		
+		Markets.potions.add(new Potions("Healing_Potion", 250, 1, 100));
+		Markets.potions.add(new Potions("Strength_Potion", 200, 1, 75));
+		Markets.potions.add(new Potions("Magic_Potion", 350, 2, 100));
+		Markets.potions.add(new Potions("Luck_Elixir", 500, 4, 65));
+		Markets.potions.add(new Potions("Mermaid_Tears", 850, 5, 100));
+		Markets.potions.add(new Potions("Ambrosia", 1000, 8, 150));
+		
+		// spells
+
+		Markets.spells.add(new IceSpells("Snow_Canon", 500, 2, 650, 250));
+		Markets.spells.add(new IceSpells("Ice_Blade", 250, 1, 450, 100));
+		Markets.spells.add(new IceSpells("Frost_Blizzard", 750, 5, 850, 350));
+		Markets.spells.add(new IceSpells("Arctic_storm", 700, 6, 800, 300));
+		
+		Markets.spells.add(new FireSpells("Flame_Tornado", 700, 4, 850, 300));
+		Markets.spells.add(new FireSpells("Breath_of_Fire", 350, 1, 450, 100));
+		Markets.spells.add(new FireSpells("Heat_Wave", 450, 2, 600, 150));
+		Markets.spells.add(new FireSpells("Lava_Commet", 800, 7, 1000, 550));
+		
+		Markets.spells.add(new LightningSpells("LightningDagger", 400, 1, 500, 150));
+		Markets.spells.add(new LightningSpells("Thunder_Blast", 750, 4, 950, 400));
+		Markets.spells.add(new LightningSpells("Electric_Arrows", 550, 5, 650, 200));
+		Markets.spells.add(new LightningSpells("Spark_Needles", 500, 2, 600, 200));
 		
 	}
 

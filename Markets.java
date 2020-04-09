@@ -10,7 +10,7 @@ public class Markets extends Cells implements BuyOrSell {
 	public static ArrayList<Items> potions = new ArrayList<Items> ();
 	public static ArrayList<Items> spells = new ArrayList<Items> ();
 	
-	public static void trade(Scanner scan, Team team) {
+	public static void trade(Scanner scan, TeamTheQuest team) {
 		
 		System.out.println(ZshColor.ANSI_PURPLE + team);
 		int p = 0;
