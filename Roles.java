@@ -6,6 +6,11 @@ public class Roles implements Comparable<Roles> {
 	protected String Name;
 	protected int Level;
 	protected double Hp;
+	/* Position
+	 * Used in The Quest Of Legends
+	 */
+	protected int coorX;
+	protected int coorY;	
 	
 	public Roles(String Name, int Level, double Hp) {
 		this.Name = Name;
@@ -33,6 +38,22 @@ public class Roles implements Comparable<Roles> {
 	
 	public void changeHp(double delta) {
 		Hp += delta;
+	}
+	
+	public void setX(int coorX) {
+		this.coorX = coorX;
+	}
+	
+	public void setY(int coorY) {
+		this.coorY = coorY;
+	}
+	
+	public int getX() {
+		return coorX;
+	}
+	
+	public int getY() {
+		return coorY;
 	}
 	
 }

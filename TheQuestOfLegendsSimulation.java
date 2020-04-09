@@ -12,8 +12,16 @@ public class TheQuestOfLegendsSimulation extends Simulation {
 	@Override
 	public void simulate() {
 		
+		System.out.println(ZshColor.ANSI_RED + "TheQuest ------> Game Start!");
+		System.out.println(ZshColor.ANSI_YELLOW + "--------------------------------------------------"
+				+ "------------------------------------------------------");
 		
-		gameMap = new TheQuestOfLegendsMap();
+		// simulation
+		gameMap = new TheQuestOfLegendsMap(scan);
+		gameMap.printMap();
+		
+		
+		boolean quitTheGame = false;
 		
 		
 	}
