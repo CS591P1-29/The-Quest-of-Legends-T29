@@ -11,6 +11,10 @@ public class TheQuestOfLegendsSimulation extends Simulation {
 	@Override
 	public void simulate() {
 		
+		
+		gameMap = new TheQuestOfLegendsMap();
+		
+		
 	}
 	
 	@Override
