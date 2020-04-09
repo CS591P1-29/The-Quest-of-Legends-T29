@@ -32,18 +32,10 @@ public class TheQuestOfLegendsMap extends Map {
 					Random rand = new Random();
 					int r = rand.nextInt(4) + 1;
 					switch (r) {
-						case 1:
-							alCell.add(new CommonCells()); // Plain Cells
-							break;
-						case 2:
-							alCell.add(new BushCells());
-							break;
-						case 3:
-							alCell.add(new KoulouCells());
-							break;
-						case 4:
-							alCell.add(new CaveCells());
-							break;
+						case 1: alCell.add(new CommonCells()); break; // Plain Cells
+						case 2: alCell.add(new BushCells()); break;
+						case 3: alCell.add(new KoulouCells()); break;
+						case 4: alCell.add(new CaveCells()); break;
 					}
 				}
 			}
@@ -119,6 +111,10 @@ public class TheQuestOfLegendsMap extends Map {
 			System.out.println("");
 		}
 		
+	}
+	
+	public TeamTheQuestOfLegends getTeam() {
+		return team;
 	}
 	
 }

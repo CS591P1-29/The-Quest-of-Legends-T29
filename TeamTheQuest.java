@@ -6,10 +6,6 @@ public class TeamTheQuest extends Team implements Encounter {
 	
 	private ArrayList<Roles> rivals = new ArrayList<Roles> ();
 	
-	public int getNum() {
-		return members.size();
-	}
-	
 	public ArrayList<Roles> getRivals() {
 		return this.rivals;
 	}
@@ -64,86 +60,6 @@ public class TeamTheQuest extends Team implements Encounter {
 			str += backpack.toString() + "\n";
 		}
 		return str;
-	}
-	
-	public void changeWeapon(Scanner scan) {
-		System.out.println(ZshColor.ANSI_BLUE + this.toString());
-		int idx_1 = 0;
-		do {
-			System.out.println(ZshColor.ANSI_RED + " - Whose equipped weapon would you like to change? Please answer his index: " + ZshColor.ANSI_RESET);
-			try {
-				idx_1 = scan.nextInt();
-			} catch (Exception e) {
-				System.out.println(ZshColor.ANSI_RED + " - Invalid input!");
-				scan.nextLine();
-			}
-		} while (idx_1 <= 0 || idx_1 > getNum());
-		scan.nextLine();
-		
-		Backpack backpack = ((Heroes) members.get(idx_1 - 1)).getBackpack();
-		
-		if (backpack.getWeapons().size() == 0) {
-			System.out.println(ZshColor.ANSI_RED + " - Hey. This guy has no weapons.");
-		}
-		else if (backpack.getWeapons().size() == 1 && ((Heroes) members.get(idx_1 - 1)).getCurWeapon() != null) {
-			System.out.println(ZshColor.ANSI_RED + " - Hey. This guy has only one equipped weapon.");			
-		}
-		else {
-			System.out.println(ZshColor.ANSI_RESET + backpack.dispWeapons());
-			
-			int idx_2 = 0;
-			do {
-				System.out.println(ZshColor.ANSI_RED + " - Which weapon would you like to use? Please answer its index: ");
-				try {
-					idx_2 = scan.nextInt();
-				} catch (Exception e) {
-					System.out.println(ZshColor.ANSI_RED + " - Invalid input!");
-					scan.nextLine();
-				}
-			} while (idx_2 <= 0 || idx_2 > backpack.getWeapons().size());
-			scan.nextLine();
-			((Heroes) members.get(idx_1 - 1)).changeCurWeapon(backpack.getWeapons().get(idx_2 - 1));
-		}
-	}
-	
-	public void changeArmor(Scanner scan) {
-		System.out.println(ZshColor.ANSI_BLUE + this.toString());
-		int idx_1 = 0;
-		do {
-			System.out.println(ZshColor.ANSI_RED + " - Whose equipped armor would you like to change? Please answer his index: " + ZshColor.ANSI_RESET);
-			try {
-				idx_1 = scan.nextInt();
-			} catch (Exception e) {
-				System.out.println(ZshColor.ANSI_RED + " - Invalid input!");
-				scan.nextLine();
-			}
-		} while (idx_1 <= 0 || idx_1 > getNum());
-		scan.nextLine();
-		
-		Backpack backpack = ((Heroes) members.get(idx_1 - 1)).getBackpack();
-		
-		if (backpack.getArmors().size() == 0) {
-			System.out.println(ZshColor.ANSI_RED + " - Hey. This guy has no armors.");
-		}
-		else if (backpack.getArmors().size() == 1 && ((Heroes) members.get(idx_1 - 1)).getCurArmor() != null) {
-			System.out.println(ZshColor.ANSI_RED + " - Hey. This guy has only one equipped armor.");			
-		}
-		else {
-			System.out.println(ZshColor.ANSI_RESET + backpack.dispArmors());
-			
-			int idx_2 = 0;
-			do {
-				System.out.println(ZshColor.ANSI_RED + " - Which armor would you like to use? Please answer its index: ");
-				try {
-					idx_2 = scan.nextInt();
-				} catch (Exception e) {
-					System.out.println(ZshColor.ANSI_RED + " - Invalid input!");
-					scan.nextLine();
-				}
-			} while (idx_2 <= 0 || idx_2 > backpack.getArmors().size());
-			scan.nextLine();
-			((Heroes) members.get(idx_1 - 1)).changeCurArmor(backpack.getArmors().get(idx_2 - 1));
-		}
 	}
 	
 	public String getRivalStatus() {

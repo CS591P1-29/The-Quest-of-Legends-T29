@@ -89,10 +89,10 @@ public class TheQuestSimulation extends Simulation {
 					System.out.println(ZshColor.ANSI_BLUE + team.toString());
 				}
 				else if (c == 'U') {
-					team.changeWeapon(scan);
+					team.changeWeapon(scan, -1);
 				}
 				else if (c == 'I') {
-					team.changeArmor(scan);
+					team.changeArmor(scan, -1);
 				}
 				else if (c == 'P') {
 					gameMap.printMap();

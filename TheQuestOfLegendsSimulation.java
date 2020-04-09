@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
@@ -22,7 +23,66 @@ public class TheQuestOfLegendsSimulation extends Simulation {
 		
 		
 		boolean quitTheGame = false;
-		
+		while (!quitTheGame) {
+			/*
+			 * Monsters' moving rules
+			 * - If he can move down, just do it
+			 * - If he can't
+			 *   - If he can move left/right, just do it
+			 *   - If he can't, stay here and do nothing
+			 */
+			
+			TeamTheQuestOfLegends team = gameMap.getTeam();
+			ArrayList<Roles> members = team.getMembers();
+			for (int i = 0; i < 3; i ++) {
+				
+				boolean finishMove = false;
+				do {
+					String strName = "H" + String.valueOf(i + 1) + "(" + members.get(i).getName() + ")";
+					System.out.println("\n" + ZshColor.ANSI_RED + " - It's " + strName + "'s turn!");
+					System.out.println(ZshColor.ANSI_CYAN + " 1. #");
+					System.out.println(ZshColor.ANSI_GREEN + "     #->Display status of " + strName);
+					System.out.println(ZshColor.ANSI_CYAN + " 2. C");
+					System.out.println(ZshColor.ANSI_GREEN + "     C->Check inventory");
+					System.out.println(ZshColor.ANSI_CYAN + " 3. W/A/S/D");
+					System.out.println(ZshColor.ANSI_GREEN + "     W->move up, A->move left, S->move down, D->move right");
+					System.out.println(ZshColor.ANSI_CYAN + " 4. T");
+					System.out.println(ZshColor.ANSI_GREEN + "     T->Teleport");
+					System.out.println(ZshColor.ANSI_CYAN + " 5. U/I");
+					System.out.println(ZshColor.ANSI_GREEN + "     U->equip/change weapon, I->equip/change armor");
+					System.out.println(ZshColor.ANSI_CYAN + " 6. P");
+					System.out.println(ZshColor.ANSI_GREEN + "     P->Display the map");
+					System.out.println(ZshColor.ANSI_CYAN + " 7. Q");
+					System.out.println(ZshColor.ANSI_GREEN + "     Q->quit the game"); //  + ZshColor.ANSI_RESET
+					System.out.println(ZshColor.ANSI_RESET);
+					String str = scan.nextLine();
+					char c = str.charAt(0);
+					if (str.length() > 1) {
+						// Invalid input
+					}
+					else if (c == '#') {
+						System.out.println(ZshColor.ANSI_BLUE + team.getStatus(i));
+					}
+					else if (c == 'C') {
+						System.out.println(ZshColor.ANSI_BLUE + team.getInventories(i));
+					}
+					else if (c == 'U') {
+						team.changeWeapon(scan, i + 1);
+					}
+					else if (c == 'I') {
+						team.changeArmor(scan, i + 1);
+					}
+					else if (c == 'Q') {
+						quitTheGame = true;
+						finishMove = true; // --> break
+					}
+					else if (c == 'W' || c == 'A' || c == 'S' || c == 'D') {
+						
+					}
+				} while (!finishMove);
+			}
+			
+		}
 		
 	}
 	

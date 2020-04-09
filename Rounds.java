@@ -88,10 +88,10 @@ public class Rounds implements Fight {
 			
 			Backpack backpack = ((Heroes) members.get(i)).getBackpack();
 			if (str.compareTo("U") == 0) {
-				team.changeWeapon(scan);
+				team.changeWeapon(scan, -1);
 			}
 			else if (str.compareTo("I") == 0) {
-				team.changeArmor(scan);
+				team.changeArmor(scan, -1);
 			}
 			else if (str.compareTo("Disp") == 0) {
 				displayStatus();
