@@ -4,10 +4,11 @@ import java.util.Scanner;
 
 public class TheQuestOfLegendsMap extends Map {
 	
+	int [][] pos = { { 0, 1 }, { 3, 4 }, { 6, 7 } };
 	TeamTheQuestOfLegends team = new TeamTheQuestOfLegends();
 
-	private Boolean filledCellsH[][] = new Boolean[8][8];
-	private Boolean filledCellsM[][] = new Boolean[8][8];
+	private boolean filledCellsH[][] = new boolean[8][8];
+	private boolean filledCellsM[][] = new boolean[8][8];
 	
 	public TheQuestOfLegendsMap(Scanner scan) {
 		// Size of board
@@ -55,9 +56,17 @@ public class TheQuestOfLegendsMap extends Map {
 		filledCellsH[7][6] = true;
 	}
 
+	public void addMonsters() {
+		team.generateRivals();
+		ArrayList<Roles> monsters = team.getMonsters();
+		for (Roles role: monsters) {
+			filledCellsM[role.getX()][role.getY()] = true;
+		}
+	}
+	
 	private String getHeroName(int x, int y) {
 		// Get Nickname
-		String str = "H";
+		String str = ZshColor.ANSI_RED + "H";
 		ArrayList<Roles> members = team.getMembers();
 		for (int i = 0; i < 3; i ++) {
 			if (members.get(i).getX() == x && members.get(i).getY() == y) {
@@ -65,12 +74,13 @@ public class TheQuestOfLegendsMap extends Map {
 				break;
 			}
 		}
+		str += ZshColor.ANSI_RESET;
 		return str;
 	}
 	
 	private String getMonsterName(int x, int y) {
 		// Get Nickname
-		String str = "M";
+		String str = ZshColor.ANSI_GREEN + "M";
 		ArrayList<Roles> monsters = team.getMonsters();
 		for (int i = 0; i < monsters.size(); i ++) {
 			if (monsters.get(i).getX() == x && monsters.get(i).getY() == y) {
@@ -78,12 +88,15 @@ public class TheQuestOfLegendsMap extends Map {
 				break;
 			}
 		}
+		str += ZshColor.ANSI_RESET;
 		return str;
 	}
 	
 	public void printMap() {
-		System.out.println(ZshColor.ANSI_RED + " - !!!Map!!!");
-		System.out.print(ZshColor.ANSI_WHITE);
+		System.out.println(ZshColor.ANSI_RED + " - !!! Map !!!");
+		System.out.println(ZshColor.ANSI_RED + " - Top,    Left  : (0, 0)");
+		System.out.println(ZshColor.ANSI_RED + " - Bottom, Right : (7, 7)");
+		System.out.print(ZshColor.ANSI_RESET);
 		
 		for (int i = 0; i < 8; i ++) {
 			for (int j = 0; j < 3; j ++) {
@@ -96,7 +109,7 @@ public class TheQuestOfLegendsMap extends Map {
 				else if (j == 1) {
 					for (int k = 0; k < 8; k ++) {
 						if (grid.get(i).get(k) instanceof NonAccessibleCells) {
-							System.out.print("| X X X |   ");
+							System.out.print("| " + ZshColor.ANSI_BLUE + "X X X" + ZshColor.ANSI_RESET + " |   ");
 						}
 						else {
 							String strH, strM;
@@ -111,6 +124,125 @@ public class TheQuestOfLegendsMap extends Map {
 			System.out.println("");
 		}
 		
+	}
+	
+	public Cells whereIsHeroes(int idx) {
+		Roles role = team.getMembers().get(idx); 
+		return grid.get(role.getX()).get(role.getY());
+	}
+	
+	public boolean move(int idx, char c) {
+		int cx, cy;
+		switch (c) {
+			case 'W': cx = -1; cy = 0; break; // move up
+			case 'A': cx = 0; cy = -1; break; // move left
+			case 'S': cx = +1; cy = 0; break; // move down
+			case 'D': cx = 0; cy = +1; break; // move right
+			default: return false;
+		}
+		
+		Roles role = team.getMembers().get(idx);
+		int nx = role.getX() + cx;
+		int ny = role.getY() + cy;
+		if (nx < 0 || nx >= 8 || ny < 0 || ny >= 8) {
+			return false;
+		}
+		if (ny == 2 || ny == 5) {
+			// Non-accessible cells
+			return false;
+		}
+		if (filledCellsH[nx][ny]) {
+			// A hero already stands at (nx, ny)
+			return false;
+		}
+		else {
+			filledCellsH[role.getX()][role.getY()] = false;
+			filledCellsH[nx][ny] = true;
+			role.setX(nx);
+			role.setY(ny);
+		}
+		
+		return true;
+	}
+	
+	public boolean goBack(int idx) {
+		Roles role = team.getMembers().get(idx);
+		if (role.getX() == 7) {
+			// This guy already stands on Nexus cell.
+			return true;
+		}
+		for (int i = 0; i < 3; i ++) {
+			if (role.getY() == pos[i][0] || role.getY() == pos[i][1]) {
+				if (!filledCellsH[7][pos[i][0]]) {
+					filledCellsH[role.getX()][role.getY()] = false;
+					filledCellsH[7][pos[i][0]] = true;
+					role.setX(7);
+					role.setY(pos[i][0]);
+					break;
+				}
+				else if (!filledCellsH[7][pos[i][1]]) {
+					filledCellsH[role.getX()][role.getY()] = false;
+					filledCellsH[7][pos[i][1]] = true;
+					role.setX(7);
+					role.setY(pos[i][1]);
+					break;
+				}
+				else {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	public void teleport(Scanner scan, int idx) {
+		Roles role = team.getMembers().get(idx);
+		
+		int cx = 0, cy = 0;
+		boolean isValid = false;
+		do {
+			System.out.println(ZshColor.ANSI_RED + " - Where you want to teleport? Ex: 4, 6 " + ZshColor.ANSI_RESET);
+			try {
+				cx = scan.nextInt();
+				cy = scan.nextInt();
+			} catch (Exception e) {
+				System.out.println(ZshColor.ANSI_RED + " - Invalid input!");
+				scan.nextLine();
+			}
+			isValid = true;
+			if (cy == 2 || cy == 5) {
+				System.out.println(ZshColor.ANSI_RED + " - Can't teleport to Non-accessible cells!" + ZshColor.ANSI_RESET);
+				isValid = false;
+			}
+			else if (Math.abs(role.getY() - cy) <= 1) {
+				System.out.println(ZshColor.ANSI_RED + " - Can't teleport to the same lane!" + ZshColor.ANSI_RESET);
+				isValid = false;
+			}
+			else if (cx == 0) {
+				System.out.println(ZshColor.ANSI_RED + " - Can't teleport to the monsters' Nexus cells directly!" + ZshColor.ANSI_RESET);
+				isValid = false;
+			}
+			else {
+				ArrayList<Roles> monsters = team.getMonsters();
+				for (int i = 0; i < monsters.size(); i ++) {
+					if (Math.abs(monsters.get(i).getY() - role.getY()) <= 1 && monsters.get(i).getX() > cx) {
+						System.out.println(ZshColor.ANSI_RED + " - Can't use teleport to pass behind a monster." + ZshColor.ANSI_RESET);
+						isValid = false;
+						break;
+					}
+				}
+			}
+			if (filledCellsH[cx][cy]) {
+				System.out.println(ZshColor.ANSI_RED + " - A hero is already there!" + ZshColor.ANSI_RESET);
+				isValid = false;
+			}
+		} while (!isValid);
+		scan.nextLine();
+		
+		filledCellsH[role.getX()][role.getY()] = false;
+		filledCellsH[cx][cy] = true;
+		role.setX(cx);
+		role.setY(cy);
 	}
 	
 	public TeamTheQuestOfLegends getTeam() {

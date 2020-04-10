@@ -43,6 +43,24 @@ public class Markets extends Cells implements BuyOrSell {
 		
 	}
 	
+	public static void trade(Scanner scan, Roles role) {
+		
+		// Buy or Sell?
+		String tradeType = "";
+		do {
+			System.out.println(ZshColor.ANSI_RED + " - What kind of business? Buy or Sell?" + ZshColor.ANSI_RESET);
+			tradeType = scan.nextLine();
+		} while (tradeType.compareTo("Buy") != 0 && tradeType.compareTo("Sell") != 0);
+		
+		if (tradeType.compareTo("Buy") == 0) {
+			buy(scan, role);
+		}
+		else {
+			sell(scan, role);
+		}
+		
+	}
+	
 	private static void sell(Scanner scan, Roles role) {
 		Backpack backpack = ((Heroes) role).getBackpack();
 		int bpSize = backpack.getWeapons().size() + backpack.getArmors().size() + 
