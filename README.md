@@ -12,7 +12,7 @@ Interface:
  - Encounter
  - Fight
  - Regeneration
- - Buy or Sell (Should add a interface due to the grading rules)
+ - BuyorSell
 
 Cells
    - PlainCells (CommonCells)
@@ -41,7 +41,6 @@ Items
      - LigntningSpells
    - Potions
 
-
 Map
    - TheQuestMap
    - TheQuestOfLegendsMap
@@ -50,10 +49,14 @@ Teams
    - TeamTheQuest
    - TeamTheQuestOfLegends
 
+Simulation
+   - TheQuestSimulation
+   - TheQuestOfLegendsSimulation
+
+Main  
 Backpack  
 Probability  
-Rounds ()  
-
-ZshColors (Works well but don't get any bonus points)  
+Rounds  
+ZshColors  
 
 Assume that hero won't fight with monster when they encounter at a Nexus cell

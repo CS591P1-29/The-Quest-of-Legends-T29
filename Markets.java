@@ -270,8 +270,5 @@ public class Markets extends Cells implements BuyOrSell {
 			System.out.println("   None\n");
 		}
 	}
-	
-	
-	// 换装 卖了
-	// 打架
+
 }
