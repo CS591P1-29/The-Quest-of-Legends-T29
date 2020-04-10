@@ -30,11 +30,11 @@ public abstract class Heroes extends Roles implements Regeneration {
 		return (Experience - 10 * Level > Roles.eps) ? true : false;
 	}
 	
-	public void Hp_Mana_Regen() {
+	public void Hp_Mana_Regen(double paramRegen) {
 		// Health Regeneration
-		Hp *= 1.05;
+		Hp *= (1.0 + paramRegen);
 		// Mana Regeneration
-		Mana *= 1.05;
+		Mana *= (1.0 + paramRegen);
 	}
 	
 	public Backpack getBackpack() {

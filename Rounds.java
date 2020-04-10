@@ -6,15 +6,15 @@ public class Rounds implements Fight {
 	private Scanner scan;
 	private ArrayList<Roles> members = null;
 	private ArrayList<Roles> rivals = null;
+	private double paramRegen;
 	
-	public Rounds(Scanner scan, TeamTheQuest team) {
+	public Rounds(Scanner scan, TeamTheQuest team, double paramRegen) {
 		this.scan = scan;
 		this.team = team;
 		this.members = team.getMembers();
 		this.rivals = team.getRivals();
+		this.paramRegen = paramRegen;
 	}
-	
-	// 0hp 不能还手 恢复
 	
 	public boolean areHeroesLose() {
 		for (Roles role: members) {
@@ -266,13 +266,14 @@ public class Rounds implements Fight {
 		// Only heroes who are not faint cound get Hp/Mana regen
 		for (Roles role: members) {
 			if (role.getHp() > 0) { // Hp > 0
-				((Heroes) role).Hp_Mana_Regen();
+				((Heroes) role).Hp_Mana_Regen(paramRegen);
 			}
 		}
 	}
 	
-	public void fight() {
+	public boolean fight() {
 		boolean gameOver = false;
+		boolean heroesWin = false;
 		do {
 			if (areHeroesLose()) {
 				System.out.println(ZshColor.ANSI_YELLOW + "\n - You got beated by monsters!\n"
@@ -308,6 +309,7 @@ public class Rounds implements Fight {
 				System.out.println(ZshColor.ANSI_YELLOW + "\n - Congratulation! Your team defeat the monters!\n"
 						+ " - Bonuses are added to specific heroes.");
 				gameOver = true;
+				heroesWin = true;
 			}
 			else {
 				// this fight is still ongoing
@@ -316,5 +318,7 @@ public class Rounds implements Fight {
 			}
 			
 		} while (!gameOver);
+		return heroesWin;
 	}
+	
 }

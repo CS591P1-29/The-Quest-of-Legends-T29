@@ -121,7 +121,7 @@ public class TheQuestSimulation extends Simulation {
 								// Encounter rate: 75%
 								System.out.println(ZshColor.ANSI_PURPLE + " - You encounter monters!");
 								team.generateRivals();
-								Rounds rounds = new Rounds(scan, team);
+								Rounds rounds = new Rounds(scan, team, 0.05);
 								rounds.fight();
 							}
 						}

@@ -1,7 +1,7 @@
 
 public interface Fight {
 	
-	void fight();
+	boolean fight();
 	
 	void singleRound();
 	

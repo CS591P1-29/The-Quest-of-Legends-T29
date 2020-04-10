@@ -10,6 +10,16 @@ public class TeamTheQuest extends Team implements Encounter {
 		return this.rivals;
 	}
 	
+	public TeamTheQuest() {
+		
+	}
+	
+	public TeamTheQuest(Roles hero, Roles monster) {
+		num = 1;
+		members.add(hero);
+		rivals.add(monster);
+	}
+	
 	public void getSize(Scanner scan) {
 		// Get the size of your team
 		num = 0;

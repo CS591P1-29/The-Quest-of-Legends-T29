@@ -33,8 +33,27 @@ public class TheQuestOfLegendsSimulation extends Simulation {
 			}
 			gameMap.printMap();
 			
-			// kankan shibushiyijingyingle
+			/*
+			 * Check the status of the whole game!
+			 */
+			int points = gameMap.checkStatus();
+			if (points == 0) {
+				// Keep playing the game
+			}
+			else if (points == 1) {
+				System.out.println(ZshColor.ANSI_RED + " - Congratulation! Heroes Win!" + ZshColor.ANSI_RESET);
+				break;
+			}
+			else if (points == 2) {
+				System.out.println(ZshColor.ANSI_RED + " - Ooops! Monsters Win!" + ZshColor.ANSI_RESET);
+				break;
+			}
+			else if (points == 3) {
+				System.out.println(ZshColor.ANSI_RED + " - Tie game!" + ZshColor.ANSI_RESET);
+				break;
+			}
 			
+			// Assume that hero won't fight with monster when they encounter at a Nexus cell
 			for (int i = 0; i < 3; i ++) {
 				gameMap.printMap();
 				Cells currentCell = gameMap.whereIsHeroes(i);
@@ -64,7 +83,7 @@ public class TheQuestOfLegendsSimulation extends Simulation {
 					System.out.println(ZshColor.ANSI_CYAN + " 3. W/A/S/D");
 					System.out.println(ZshColor.ANSI_GREEN + "     W->move up, A->move left, S->move down, D->move right");
 					System.out.println(ZshColor.ANSI_CYAN + " 4. T");
-					System.out.println(ZshColor.ANSI_GREEN + "     T->Teleport");
+					System.out.println(ZshColor.ANSI_GREEN + "     T->Teleport  | Only input T");
 					System.out.println(ZshColor.ANSI_CYAN + " 5. B");
 					System.out.println(ZshColor.ANSI_GREEN + "     B->Go back to Nexus");
 					System.out.println(ZshColor.ANSI_CYAN + " 6. U/I");
@@ -93,11 +112,20 @@ public class TheQuestOfLegendsSimulation extends Simulation {
 						}
 						else {
 							gameMap.printMap();
+							// battle
+							currentCell = gameMap.whereIsHeroes(i);
+							if (!(currentCell instanceof NexusCells)) {
+								gameMap.checkEncounter(scan, i);
+							}
 							finishMove = true;
 						}
 					}
 					else if (c == 'T') {
 						gameMap.teleport(scan, i);
+						currentCell = gameMap.whereIsHeroes(i);
+						if (!(currentCell instanceof NexusCells)) {
+							gameMap.checkEncounter(scan, i);
+						}
 						finishMove = true;
 					}
 					else if (c == 'B') {
@@ -133,9 +161,11 @@ public class TheQuestOfLegendsSimulation extends Simulation {
 			 * - If he can't 
 			 *   - If he can move left/right, just do it
 			 *   - If he can't, stay here and do nothing
-			 * Tips: The hero can't pass behind a monster without killing it,
-			 *       but not vice versa.
+			 *   
+			 *   
+			 * - If a monster encounters a hero, FIGHT!
 			 */
+			gameMap.moveMonster(scan);
 			
 			
 			

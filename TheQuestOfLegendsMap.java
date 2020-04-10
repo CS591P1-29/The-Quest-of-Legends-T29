@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -62,6 +63,10 @@ public class TheQuestOfLegendsMap extends Map {
 		for (Roles role: monsters) {
 			filledCellsM[role.getX()][role.getY()] = true;
 		}
+	}
+	
+	public TeamTheQuestOfLegends getTeam() {
+		return team;
 	}
 	
 	private String getHeroName(int x, int y) {
@@ -128,6 +133,11 @@ public class TheQuestOfLegendsMap extends Map {
 	
 	public Cells whereIsHeroes(int idx) {
 		Roles role = team.getMembers().get(idx); 
+		return grid.get(role.getX()).get(role.getY());
+	}
+	
+	public Cells whereIsMonsters(int idx) {
+		Roles role = team.getMonsters().get(idx);
 		return grid.get(role.getX()).get(role.getY());
 	}
 	
@@ -245,8 +255,161 @@ public class TheQuestOfLegendsMap extends Map {
 		role.setY(cy);
 	}
 	
-	public TeamTheQuestOfLegends getTeam() {
-		return team;
+	public void checkEncounter(Scanner scan, int idx) {
+		Roles hero = team.getMembers().get(idx);
+		Roles monster = null;
+		
+		int index = 0;
+		for (Roles role: team.getMonsters()) {
+			index ++;
+			if (hero.getX() == role.getX() && hero.getY() == role.getY()) {
+				monster = role;
+				break;
+			}
+		}
+		if (monster == null) {
+			return;
+		}
+		
+		TeamTheQuest teamTQ = new TeamTheQuest(hero, monster);
+		Rounds rounds = new Rounds(scan, teamTQ, 0.10);
+		/*
+		 * If hero wins, the monster should be removed from the map
+		 * If monster wins, the hero should be moved to a Nexus cell
+		 */
+		boolean heroesWin = rounds.fight();
+		if (heroesWin) {
+			filledCellsM[monster.getX()][monster.getY()] = false;
+			Iterator<Roles> it = team.getMonsters().iterator();
+			Roles role = null;
+			for (int i = 0; i < index; i ++) {
+				role = it.next();
+			}
+			it.remove();
+		}
+		else {
+			filledCellsH[hero.getX()][hero.getY()] = false;
+			if (!filledCellsH[7][hero.getY()]) {
+				filledCellsH[7][hero.getY()] = true;
+				hero.setX(7);
+			}
+			else {
+				for (int i = 0; i < 8; i ++) {
+					if (!filledCellsH[7][i]) {
+						filledCellsH[7][i] = true;
+						hero.setX(i);
+					}
+				}
+			}
+		}
+	}
+	
+	public void moveMonster(Scanner scan) {
+		ArrayList<Roles> monsters = team.getMonsters();
+		for (Roles role: monsters) {
+			if (!filledCellsM[role.getX() + 1][role.getY()]) {
+				filledCellsM[role.getX()][role.getY()] = false;
+				filledCellsM[role.getX() + 1][role.getY()] = true;
+				role.setX(role.getX() + 1);
+			}
+			else {
+				int y1 = role.getY() + 1;
+				if (y1 == 1 || y1 == 4 || y1 == 7) {
+					if (!filledCellsM[role.getX()][y1]) {
+						filledCellsM[role.getX()][role.getY()] = false;
+						filledCellsM[role.getX()][y1] = false;
+						role.setY(y1);
+						continue;
+					}
+				}
+				int y2 = role.getY() - 1;
+				if (y2 == 0 || y2 == 3 || y2 == 6) {
+					if (!filledCellsM[role.getX()][y2]) {
+						filledCellsM[role.getX()][role.getY()] = false;
+						filledCellsM[role.getX()][y2] = false;
+						role.setY(y2);
+						continue;
+					}
+				}
+			}
+		}
+		
+		/*
+		 * If a monster encounters a hero at a non-nexus cell, --> fight
+		 */
+		ArrayList<Roles> members = team.getMembers();
+		int index = 0;
+		for (Roles monster: monsters) {
+			index ++;
+			if (monster.getX() != 7 && filledCellsH[monster.getX()][monster.getY()]) {
+				for (Roles hero: members) {
+					if (hero.getX() == monster.getX() && hero.getY() == monster.getY()) {
+						TeamTheQuest teamTQ = new TeamTheQuest(hero, monster);
+						Rounds rounds = new Rounds(scan, teamTQ, 0.10);
+						
+						boolean heroesWin = rounds.fight();
+						if (heroesWin) {
+							filledCellsM[monster.getX()][monster.getY()] = false;
+							Iterator<Roles> it = team.getMonsters().iterator();
+							Roles role = null;
+							for (int i = 0; i < index; i ++) {
+								role = it.next();
+							}
+							it.remove();
+						}
+						else {
+							filledCellsH[hero.getX()][hero.getY()] = false;
+							if (!filledCellsH[7][hero.getY()]) {
+								filledCellsH[7][hero.getY()] = true;
+								hero.setX(7);
+							}
+							else {
+								for (int i = 0; i < 8; i ++) {
+									if (!filledCellsH[7][i]) {
+										filledCellsH[7][i] = true;
+										hero.setX(i);
+									}
+								}
+							}
+						}
+						
+						break;
+					}
+				}
+			}
+		}
+	}
+	
+	public int checkStatus() {
+		/*
+		 * If hero wins, return 1
+		 * If monster wins, return 2
+		 * If the game tie, return 3
+		 * Otherwise, return 0
+		 */
+		boolean heroWin = false;
+		boolean monsterWin = false;
+		for (int i = 0; i < 8; i ++) {
+			if (i == 2 || i == 5) {
+				continue;
+			}
+			if (filledCellsH[0][i]) {
+				heroWin = true;
+			}
+			if (filledCellsM[7][i]) {
+				monsterWin = true;
+			}
+		}
+		if (heroWin && !monsterWin) {
+			return 1;
+		}
+		if (!heroWin && monsterWin) {
+			return 2;
+		}
+		if (heroWin && monsterWin) {
+			return 3;
+		}
+		return 0;
 	}
 	
 }

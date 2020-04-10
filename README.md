@@ -55,3 +55,5 @@ Probability
 Rounds ()  
 
 ZshColors (Works well but don't get any bonus points)  
+
+Assume that hero won't fight with monster when they encounter at a Nexus cell
