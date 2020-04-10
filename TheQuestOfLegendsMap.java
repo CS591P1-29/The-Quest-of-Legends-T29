@@ -277,7 +277,19 @@ public class TheQuestOfLegendsMap extends Map {
 		 * If hero wins, the monster should be removed from the map
 		 * If monster wins, the hero should be moved to a Nexus cell
 		 */
-		boolean heroesWin = rounds.fight();
+		double param1 = 0, param2 = 0, param3 = 0;
+		Cells currentCell = grid.get(hero.getX()).get(hero.getY());
+		if (currentCell instanceof KoulouCells) {
+			param1 += 0.1;
+		}
+		else if (currentCell instanceof CaveCells) {
+			param2 += 0.1;
+		}
+		else if (currentCell instanceof BushCells) {
+			param3 += 0.1;
+		}
+		
+		boolean heroesWin = rounds.fight(param1, param2, param3);
 		if (heroesWin) {
 			filledCellsM[monster.getX()][monster.getY()] = false;
 			Iterator<Roles> it = team.getMonsters().iterator();
@@ -347,7 +359,19 @@ public class TheQuestOfLegendsMap extends Map {
 						TeamTheQuest teamTQ = new TeamTheQuest(hero, monster);
 						Rounds rounds = new Rounds(scan, teamTQ, 0.10);
 						
-						boolean heroesWin = rounds.fight();
+						double param1 = 0, param2 = 0, param3 = 0;
+						Cells currentCell = grid.get(hero.getX()).get(hero.getY());
+						if (currentCell instanceof KoulouCells) {
+							param1 += 0.1;
+						}
+						else if (currentCell instanceof CaveCells) {
+							param2 += 0.1;
+						}
+						else if (currentCell instanceof BushCells) {
+							param3 += 0.1;
+						}
+						
+						boolean heroesWin = rounds.fight(param1, param2, param3);
 						if (heroesWin) {
 							filledCellsM[monster.getX()][monster.getY()] = false;
 							Iterator<Roles> it = team.getMonsters().iterator();

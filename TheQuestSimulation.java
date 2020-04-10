@@ -122,7 +122,7 @@ public class TheQuestSimulation extends Simulation {
 								System.out.println(ZshColor.ANSI_PURPLE + " - You encounter monters!");
 								team.generateRivals();
 								Rounds rounds = new Rounds(scan, team, 0.05);
-								rounds.fight();
+								rounds.fight(0, 0, 0);
 							}
 						}
 						else if (currentCell instanceof Markets) {

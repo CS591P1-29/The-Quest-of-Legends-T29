@@ -46,8 +46,13 @@ public class Rounds implements Fight {
 	 *    - Attack
 	 *    - Change Weapon/Armor
 	 * 2. then monsters
+	 * 
+	 * 3. Ability Augmentation
+	 * param1: STR *= (1 + param1)
+	 * param2: AGI *= (1 + param2)
+	 * param3: DEX *= (1 + param3)
 	 */
-	public void singleRound() {
+	public void singleRound(double param1, double param2, double param3) {
 		
 		// Heroes' turn
 		System.out.println(ZshColor.ANSI_YELLOW + "--------------------------------------------------"
@@ -142,7 +147,7 @@ public class Rounds implements Fight {
 						continue;
 					}
 					// Calculate the damage of one single hit
-					double oneHit = ((Heroes) members.get(i)).getSTR() * 0.05;
+					double oneHit = ((Heroes) members.get(i)).getSTR() * 0.05 * (1 + param1);
 					if (((Heroes) members.get(i)).getCurWeapon() != null) {
 						oneHit += ((Weapons) ((Heroes) members.get(i)).getCurWeapon()).getDamage() * 0.05;
 					}
@@ -185,7 +190,7 @@ public class Rounds implements Fight {
 							
 							// Calculate the damage of one single hit
 							double oneHit = ((Spells) backpack.getSpells().get(idx - 1)).getDamage() 
-									* (1 + ((Heroes ) members.get(i)).getDEX() / 10000);
+									* (1 + ((Heroes ) members.get(i)).getDEX() * (1 + param3) / 10000);
 							rivals.get(target - 1).changeHp(-oneHit);
 							((Spells) backpack.getSpells().get(idx - 1)).deteriorate(rivals.get(target - 1));
 							((Heroes ) members.get(i)).changeMana(-((Spells) backpack.getSpells().get(idx - 1)).getManaCost());
@@ -216,7 +221,7 @@ public class Rounds implements Fight {
 			}
 			if (members.get(i).getHp() > 0) {
 				// if the Hp of the i-th hero is greater than 0, just attack him
-				if (Probability.estimate(0.01 * ((Heroes) members.get(i)).getDodgeChance())) {
+				if (Probability.estimate(0.01 * ((Heroes) members.get(i)).getDodgeChance() * (1 + param2))) {
 					// if the hero dodges the attack
 					System.out.println(ZshColor.ANSI_GREEN + " - " + members.get(i).getName() 
 							+ " dodges an attack from " + rivals.get(i).getName() + "!");
@@ -271,7 +276,7 @@ public class Rounds implements Fight {
 		}
 	}
 	
-	public boolean fight() {
+	public boolean fight(double param1, double param2, double param3) {
 		boolean gameOver = false;
 		boolean heroesWin = false;
 		do {
@@ -313,7 +318,7 @@ public class Rounds implements Fight {
 			}
 			else {
 				// this fight is still ongoing
-				singleRound();
+				singleRound(param1, param2, param3);
 				regeneration();
 			}
 			
