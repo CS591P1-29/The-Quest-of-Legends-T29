@@ -114,13 +114,20 @@ public class TheQuestOfLegendsMap extends Map {
 				else if (j == 1) {
 					for (int k = 0; k < 8; k ++) {
 						if (grid.get(i).get(k) instanceof NonAccessibleCells) {
-							System.out.print("| " + ZshColor.ANSI_BLUE + "X X X" + ZshColor.ANSI_RESET + " |   ");
+							System.out.print(ZshColor.ANSI_RED + "| " + ZshColor.ANSI_BLUE + "X X X" 
+									+ ZshColor.ANSI_RED + " |   " + ZshColor.ANSI_RESET);
 						}
 						else {
 							String strH, strM;
 							strH = filledCellsH[i][k] ? getHeroName(i, k) : "  ";
 							strM = filledCellsM[i][k] ? getMonsterName(i, k) : "  ";
-							System.out.print("| " + strH + " " + strM + " |   ");
+							if (grid.get(i).get(k) instanceof NexusCells) {
+								System.out.print(ZshColor.ANSI_GREEN + "| " + strH + " " + strM 
+										+ ZshColor.ANSI_GREEN + " |   " + ZshColor.ANSI_RESET);
+							}
+							else { 
+								System.out.print("| " + strH + " " + strM + " |   ");
+							}
 						}
 					}
 				}
