@@ -9,7 +9,7 @@ When pwd --> XXXX/The-Quest-of-Legends-T29
 "java Main"  
 
 **Gourp Member**  
-Bofeng Liu
+Bofeng Liu  
 Nelson Mei
 
 **Class Design:**  
