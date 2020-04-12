@@ -3,11 +3,6 @@
 **GitHub**
 https://github.com/CS591P1-29/The-Quest-of-Legends-T29  
 
-**Compile and Run**  
-When pwd --> XXXX/The-Quest-of-Legends-T29  
-"javac Main.java"  
-"java Main"  
-
 **Gourp Member**  
 Bofeng Liu
 Nelson Mei
