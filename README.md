@@ -18,13 +18,13 @@ But our group add some new features and design new classes for Game "TheQuestOfL
 
 
 Interface:
- - DataInitialize (New feature: We read all data from files using text parsing. We merge the code from Bofeng and Nelson.)
+ - DataInitialize (Add a new feature: We read all data from files using text parsing. We merge the code from Bofeng and Nelson.)
  - Encounter
  - Fight (New feature: Ability augmentation at different type of cells)
- - Regeneration
+ - Regeneration (Add a feature that we could specify the regeneration parameter. It provides better scalability)
  - BuyorSell (A new interface)
 
-Cells (Base class)
+Cells (Base class) (They provide better inheritance.)
    - PlainCells (Almost the same as CommonCells, but we color them)
    - InAccessibleCells (Almost the same as NonAccessibleCells, but we color them)
    - NexusCells/Markets (Nexus is a new class. Markets is the same as previous implementation)
@@ -32,7 +32,7 @@ Cells (Base class)
    - KoulouCells (A new class)
    - CaveCells (A new class)
 
-Roles (Base class)
+Roles (Base class) (All subclasses are exactly the same as in the previous implementation of Bofeng. They provide better inheritance.)
    - Heroes
      - Warriors
      - Paladins
@@ -42,7 +42,7 @@ Roles (Base class)
      - Exoskeletons
      - Spirits
 
-Items (Base class)
+Items (Base class) (All subclasses are exactly the same as in the previous implementation of Bofeng. They provide better inheritance.)
    - Weapons
    - Armors
    - Spells
@@ -51,23 +51,23 @@ Items (Base class)
      - LigntningSpells
    - Potions
 
-Map (A new base class. The maps of two games have a bunch of common attributes, so we just re-use them)
+Map (A new base class. The maps of two games have a bunch of common attributes, so we just re-use them. It provides better encapsulation and scalability.)
    - TheQuestMap (It's the same as the previous implementation)
-   - TheQuestOfLegendsMap (A new class that is slightly different from ↑)  
+   - TheQuestOfLegendsMap (A new class that is slightly different from ↑. We re-use some code and add new code)  
 
-Teams (A new base class. The teams of two games have a bunch of common attributes, so we just re-use them)
+Teams (A new base class. The teams of two games have a bunch of common attributes, so we just re-use them. It provides better encapsulation and scalability.)
    - TeamTheQuest (It's the same as the previous implementation)
-   - TeamTheQuestOfLegends (A new class that is slightly different from ↑)  
+   - TeamTheQuestOfLegends (A new class that is slightly different from ↑. We re-use some code and add new code)  
 
-Simulation (A new base class. The simulation process of two games have common attributes, so we just re-use them)
+Simulation (A new base class. The simulation process of two games have common attributes, so we just re-use them. It provides better encapsulation and scalability.)
    - TheQuestSimulation (It's the same as the previous implementation)
-   - TheQuestOfLegendsSimulation
+   - TheQuestOfLegendsSimulation (A new class that simulates the game "The Quest of Legends".)
 
-Main (Add new functionality: player can choose which game he wants to play)  
-Backpack (Every hero has a backpack which stores all his items)  
-Probability  
+Main (Add new functionality: player can choose which game he wants to play.)  
+Backpack (Every hero has a backpack which stores all his items. It provides better encapsulation.)  
+Probability (A helper class that processing probability. It provides better encapsulation and scalability)  
 Rounds (Add new functionality: Ability augmentation)  
-ZshColors  
+ZshColors (A helper class that make us easier to use colors to represent all messages. It provides better encapsulation.)  
 
 -----------------------------------------------
 When hero is not in a fight with monster, he can
