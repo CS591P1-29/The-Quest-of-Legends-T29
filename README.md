@@ -61,8 +61,20 @@ Rounds
 ZshColors  
 
 -----------------------------------------------
-Assume that hero won't fight with monster when they encounter at a Nexus cell
+When hero is not in a fight with monster, he can
+ - Display his status
+ - Check his inventory
+ - W/A/S/D
+ - Teleport
+ - B (back to Nexus cell)
+ - Equip/Change Weapon
+ - Equip/Change Armor
+ - Display the map
+ - Quit the game  
+Only action "W/A/S/D", "Teleport" and "B" will cost one action point.
 
+-----------------------------------------------
+Assume that hero won't fight with monster when they encounter at a Nexus cell  
 
 -----------------------------------------------
 Pipeline for doing business:  
@@ -84,7 +96,7 @@ If you encounter monsters before you arrive at a market, you definitely lose. Th
 
 -----------------------------------------------
 A fight consists of several rounds
-For each round, each hero has only one action points. He can do one following action once.
+At each round, each hero has only one action point. He can do one following action once.
  - Attack
  - Cast a spell
  - Drink a potion
@@ -94,7 +106,8 @@ For each round, each hero has only one action points. He can do one following ac
 
 -----------------------------------------------
 I adjusted the attributes of weapons. 
- - Set the base damage of Shield and Dagger to 300 and 400
- - Then, base damage *= 5
-I changed some heroes' name.
+ - Set the base damage of Shield and Dagger to 300 and 400  
+ - Then, base damage *= 5  
+I changed some heroes' name.  
+Heroes can't know monsters' status value before encountering them.  
 

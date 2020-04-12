@@ -7,15 +7,12 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		
-		
-		System.out.println(ZshColor.ANSI_RED + " - Which game do you wanna play? Please input 1 or 2.");
-		System.out.println(ZshColor.ANSI_RED + " - 1. The Quest");
-		System.out.println(ZshColor.ANSI_RED + " - 2. The Quest Of Legends" + ZshColor.ANSI_RESET);
-		
 		String gameType = "";
 		
 		do {
-			System.out.println(ZshColor.ANSI_RED + " - Would you like to buy/sell items?  Yes/No" + ZshColor.ANSI_RESET);
+			System.out.println(ZshColor.ANSI_RED + " - Which game do you wanna play? Please input 1 or 2.");
+			System.out.println(ZshColor.ANSI_RED + " - 1. The Quest");
+			System.out.println(ZshColor.ANSI_RED + " - 2. The Quest Of Legends" + ZshColor.ANSI_RESET);
 			gameType = scan.nextLine();
 			if (gameType.compareTo("1") == 0) {
 				TheQuestSimulation theQuest = new TheQuestSimulation(scan);

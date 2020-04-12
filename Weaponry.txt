@@ -1,0 +1,8 @@
+Name/cost/level/damage/required hands
+Sword           500     1    4000    1
+Bow             300     2    2500    2
+Scythe          1000    6    5500   2
+Axe             550     5    4250    1
+Shield          400     1    1500    1
+TSwords     	1400    8    8000   2
+Dagger          200     1    2000    1      

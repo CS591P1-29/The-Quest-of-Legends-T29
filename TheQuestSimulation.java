@@ -146,13 +146,6 @@ public class TheQuestSimulation extends Simulation {
 	}
 	
 	@Override
-	public void initialize(String fileName) {
-		// TODO- Text Parse
-		
-		
-	}
-	
-	@Override
 	public void initialize() {
 		// heroes
 		Heroes.heroes.add(new Warriors("Gaerdal_Ironhand", 100, 700, 500, 600, 1354, 7));
